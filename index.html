@@ -4,21 +4,38 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vault Personal – Irene MG</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Inter', sans-serif; }
+    body { font-family: 'Inter', sans-serif; transition: background-color 0.3s ease, color 0.3s ease; }
+    .dark body { background-color: #111827; color: #f3f4f6; }
+    .filter-btn.active { background-color: #6366f1; color: white; }
   </style>
+  <script>
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.documentElement.classList.add('dark');
+    }
+
+    function filterCategory(category) {
+      const items = document.querySelectorAll('[data-category]');
+      items.forEach(item => {
+        item.style.display = category === 'all' || item.dataset.category.includes(category) ? 'block' : 'none';
+      });
+
+      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelector(`[data-filter="${category}"]`).classList.add('active');
+    }
+  </script>
 </head>
-<body class="bg-gray-50 text-gray-900">
-  <header class="bg-white shadow sticky top-0 z-10">
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+  <header class="bg-white dark:bg-gray-800 shadow sticky top-0 z-10">
     <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
       <h1 class="text-xl font-bold">📁 Mi Vault Personal</h1>
       <nav class="space-x-4 text-sm">
-        <a href="#prompts" class="hover:text-indigo-600">Prompts</a>
-        <a href="#enlaces" class="hover:text-indigo-600">Enlaces</a>
-        <a href="#imagenes" class="hover:text-indigo-600">Imágenes</a>
-        <a href="#videos" class="hover:text-indigo-600">Videos</a>
+        <a href="#vault" class="hover:text-indigo-600 dark:hover:text-indigo-400">Contenido</a>
+        <a href="#imagenes" class="hover:text-indigo-600 dark:hover:text-indigo-400">Imágenes</a>
+        <a href="#videos" class="hover:text-indigo-600 dark:hover:text-indigo-400">Videos</a>
       </nav>
     </div>
   </header>
@@ -26,23 +43,34 @@
   <main class="max-w-5xl mx-auto px-4 py-10">
     <section class="text-center mb-12">
       <h2 class="text-3xl font-bold mb-2">Bienvenida a tu espacio personal</h2>
-      <p class="text-gray-600">Un lugar donde guardas lo que te inspira, lo que usas y lo que crearás.</p>
+      <p class="text-gray-600 dark:text-gray-300">Filtra y accede a tus recursos favoritos de IA, UX/UI, diseño, prompts y herramientas.</p>
     </section>
 
-    <section id="prompts" class="mb-12">
-      <h3 class="text-xl font-semibold mb-4">💡 Prompts</h3>
-      <ul class="space-y-2">
-        <li class="bg-white p-4 rounded shadow-sm">"Dame 5 ideas de diseño para portfolios en 3D con interacción"</li>
-        <li class="bg-white p-4 rounded shadow-sm">"Explícame Tailwind como si tuviera 5 años"</li>
-      </ul>
-    </section>
+    <section id="vault" class="mb-12">
+      <h3 class="text-xl font-semibold mb-6 text-center">🎯 Filtrar por categoría</h3>
+      <div class="flex flex-wrap gap-2 justify-center mb-6">
+        <button class="filter-btn border px-4 py-2 rounded" data-filter="all" onclick="filterCategory('all')">Todos</button>
+        <button class="filter-btn border px-4 py-2 rounded" data-filter="IA" onclick="filterCategory('IA')">IA</button>
+        <button class="filter-btn border px-4 py-2 rounded" data-filter="UX" onclick="filterCategory('UX')">UX/UI</button>
+        <button class="filter-btn border px-4 py-2 rounded" data-filter="Figma" onclick="filterCategory('Figma')">Figma</button>
+        <button class="filter-btn border px-4 py-2 rounded" data-filter="Web" onclick="filterCategory('Web')">Webs útiles</button>
+      </div>
 
-    <section id="enlaces" class="mb-12">
-      <h3 class="text-xl font-semibold mb-4">🔗 Enlaces</h3>
-      <ul class="list-disc list-inside text-indigo-700">
-        <li><a href="https://ui.shadcn.dev/" target="_blank">Componentes UI – shadcn</a></li>
-        <li><a href="https://www.framer.com/motion/" target="_blank">Animaciones en Framer Motion</a></li>
-      </ul>
+      <div class="space-y-3">
+        <div class="bg-white dark:bg-gray-800 p-4 rounded shadow" data-category="IA">🔮 ChatGPT</div>
+        <div class="bg-white dark:bg-gray-800 p-4 rounded shadow" data-category="IA">💬 Gemini</div>
+        <div class="bg-white dark:bg-gray-800 p-4 rounded shadow" data-category="IA">🎨 Ideogram</div>
+        <div class="bg-white dark:bg-gray-800 p-4 rounded shadow" data-category="IA">🧠 Claude</div>
+        <div class="bg-white dark:bg-gray-800 p-4 rounded shadow" data-category="IA">📚 Scispace</div>
+        <div class="bg-white dark:bg-gray-800 p-4 rounded shadow" data-category="Web UX">🌐 Godly Website</div>
+        <div class="bg-white dark:bg-gray-800 p-4 rounded shadow" data-category="UX Figma">🛠️ Ditto (Plugin Figma)</div>
+        <div class="bg-white dark:bg-gray-800 p-4 rounded shadow" data-category="Figma">✍️ Frontitude</div>
+        <div class="bg-white dark:bg-gray-800 p-4 rounded shadow" data-category="Web">🔗 curated.design</div>
+        <div class="bg-white dark:bg-gray-800 p-4 rounded shadow" data-category="IA">📄 PromptBase</div>
+        <div class="bg-white dark:bg-gray-800 p-4 rounded shadow" data-category="Figma UX">📝 Grammarly</div>
+        <div class="bg-white dark:bg-gray-800 p-4 rounded shadow" data-category="UX Web">🎨 Component Gallery</div>
+        <div class="bg-white dark:bg-gray-800 p-4 rounded shadow" data-category="Web">📌 Awwwards</div>
+      </div>
     </section>
 
     <section id="imagenes" class="mb-12">
@@ -61,7 +89,7 @@
     </section>
   </main>
 
-  <footer class="text-center py-6 text-sm text-gray-500">
+  <footer class="text-center py-6 text-sm text-gray-500 dark:text-gray-400">
     Hecho por Irene MG · Diseño UX/UI con ❤️ · Abril 2025
   </footer>
 </body>
