@@ -59,6 +59,52 @@
       color: var(--text-dark);
     }
     
+    /* Títulos más oscuros en modo oscuro */
+    .dark .card h3 {
+      color: #ffffff;
+      font-weight: 600;
+    }
+    
+    /* Colores para títulos y textos en modo oscuro */
+    .dark .bg-white {
+      background-color: #1e293b !important;
+    }
+    
+    .dark .text-gray-900 {
+      color: #f9fafb !important;
+    }
+    
+    .dark .text-gray-800 {
+      color: #f1f5f9 !important;
+    }
+    
+    .dark .text-gray-700 {
+      color: #e5e7eb !important;
+    }
+    
+    .dark .text-gray-600 {
+      color: #d1d5db !important;
+    }
+    
+    /* Prompt colapsable */
+    .prompt-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    
+    .prompt-content.active {
+      max-height: 500px;
+    }
+    
+    .prompt-toggle-icon {
+      transition: transform 0.3s ease;
+    }
+    
+    .prompt-toggle-icon.active {
+      transform: rotate(180deg);
+    }
+    
     /* Barra de progreso */
     .progress-bar {
       position: fixed;
@@ -400,6 +446,9 @@
       }
     }
   </script>
+  
+  <!-- Funciones de utilidad para iconos -->
+  <script src="icon-utils.js"></script>
 </head>
 <body class="bg-gray-50 text-gray-900 light">
   <!-- Cursor personalizado y barra de progreso -->
@@ -418,7 +467,7 @@
           <path d="M19 7L15 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
           <path d="M16 7L19 7L19 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
         </svg> 
-        <h1 class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-fuchsia-500">✨ Vault Personal</h1>
+        <h1 class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-fuchsia-400">✨ Vault Personal</h1>
       </div>
       
       <!-- Navegación de escritorio -->
@@ -430,8 +479,6 @@
         <a href="#portfolio" class="nav-link font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Portfolio</a>
         <a href="#imagenes" class="nav-link font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Imágenes</a>
         <a href="#videos" class="nav-link font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Vídeos</a>
-        <a href="#calendario" class="nav-link font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Calendario</a>
-        <a href="#tareas" class="nav-link font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Tareas</a>
         <a href="#prompts" class="nav-link font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Prompts</a>
       </nav>
       
@@ -461,8 +508,6 @@
         <a href="#portfolio" class="font-medium hover:text-indigo-600 dark:hover:text-indigo-400">Portfolio</a>
         <a href="#imagenes" class="font-medium hover:text-indigo-600 dark:hover:text-indigo-400">Imágenes</a>
         <a href="#videos" class="font-medium hover:text-indigo-600 dark:hover:text-indigo-400">Vídeos</a>
-        <a href="#calendario" class="font-medium hover:text-indigo-600 dark:hover:text-indigo-400">Calendario</a>
-        <a href="#tareas" class="font-medium hover:text-indigo-600 dark:hover:text-indigo-400">Tareas</a>
         <a href="#prompts" class="font-medium hover:text-indigo-600 dark:hover:text-indigo-400">Prompts</a>
       </nav>
     </div>
@@ -489,7 +534,13 @@
               </svg>
               Explorar contenido
             </a>
-            <a href="#calendario" class="btn btn-ghost">
+            <a href="#ia" class="btn btn-ghost">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none">
+                <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Añadir contenido
+            </a>
+           <!--- <a href="#calendario" class="btn btn-ghost">
               <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none">
                 <rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M16 2V6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -497,13 +548,13 @@
                 <path d="M3 10H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               Ver calendario
-            </a>
+            </a> -->
           </div>
         </div>
       </div>
     </section>
     
-    <!-- Filtros -->
+    <!-- Filtros -
     <div class="flex items-center justify-center flex-wrap gap-3" data-aos="fade-up">
       <button data-filter="all" class="filter-btn active btn bg-gray-200 hover:bg-indigo-600 hover:text-white dark:bg-gray-800 dark:hover:bg-indigo-600 flex items-center gap-2">
         <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none">
@@ -565,13 +616,11 @@
       </button>
       <button data-filter="Prompts" class="filter-btn btn bg-gray-200 hover:bg-indigo-600 hover:text-white dark:bg-gray-800 dark:hover:bg-indigo-600 flex items-center gap-2">
         <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none">
-          <path d="M12 2v8l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M12 2v8l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M4.93 10A9 9 0 0 0 3 16.5a9 9 0 0 0 9 9 9 9 0 0 0 9-9 9 9 0 0 0-1.93-6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        Prompts
+        Añadir
       </button>
-    </div>
+    </div>-->
 
     <!-- Sección IA -->
     <section id="ia" class="pt-16" data-aos="fade-up" data-aos-delay="100">
@@ -1223,6 +1272,124 @@
       </div>
       
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="portfolio-items">
+      </div>
+    </section>
+    
+    <!-- Sección Imágenes -->
+    <section id="imagenes" class="pt-16" data-aos="fade-up" data-aos-delay="100">
+      <div class="flex justify-between items-center mb-8">
+        <h2 class="text-2xl font-bold section-title">🖼️ Biblioteca de Imágenes</h2>
+        <button onclick="openImageUploader()" class="btn btn-primary">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none">
+            <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Añadir Imagen
+        </button>
+      </div>
+      
+      <input type="file" id="image-upload" accept="image/*" multiple style="display: none;" onchange="handleImageUpload(event)">
+      
+      <div id="image-drop-area" class="file-drop-area mb-8">
+        <div class="text-center">
+          <svg class="w-12 h-12 mx-auto text-indigo-400" viewBox="0 0 24 24" fill="none">
+            <path d="M4 16.2422C2.79401 15.435 2 14.0602 2 12.5C2 10.1564 3.79151 8.23129 6.07974 8.01937C6.54781 5.17213 9.02024 3 12 3C14.9798 3 17.4522 5.17213 17.9203 8.01937C20.2085 8.23129 22 10.1564 22 12.5C22 14.0602 21.206 15.435 20 16.2422" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8 16L12 12M12 12L16 16M12 12V21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p class="mt-2 text-gray-600 dark:text-gray-400">Arrastra y suelta imágenes aquí o <span class="text-indigo-600 dark:text-indigo-400 font-medium">haz clic para buscar</span></p>
+          <p class="text-sm text-gray-500 dark:text-gray-500 mt-1">PNG, JPG, GIF, etc.</p>
+        </div>
+      </div>
+      
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="gallery-container">
+        <!-- Las imágenes se añadirán aquí dinámicamente -->
+      </div>
+    </section>
+    
+    <!-- Sección Vídeos -->
+    <section id="videos" class="pt-16" data-aos="fade-up" data-aos-delay="100">
+      <div class="flex justify-between items-center mb-8">
+        <h2 class="text-2xl font-bold section-title">🎬 Vídeos</h2>
+        <button onclick="document.getElementById('video-upload').click()" class="btn btn-primary">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none">
+            <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Añadir Vídeo
+        </button>
+      </div>
+      
+      <input type="file" id="video-upload" accept="video/*" multiple style="display: none;" onchange="handleVideoUpload(event)">
+      
+      <div id="video-drop-area" class="file-drop-area mb-8">
+        <div class="text-center">
+          <svg class="w-12 h-12 mx-auto text-indigo-400" viewBox="0 0 24 24" fill="none">
+            <path d="M4 16.2422C2.79401 15.435 2 14.0602 2 12.5C2 10.1564 3.79151 8.23129 6.07974 8.01937C6.54781 5.17213 9.02024 3 12 3C14.9798 3 17.4522 5.17213 17.9203 8.01937C20.2085 8.23129 22 10.1564 22 12.5C22 14.0602 21.206 15.435 20 16.2422" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8 16L12 12M12 12L16 16M12 12V21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p class="mt-2 text-gray-600 dark:text-gray-400">Arrastra y suelta vídeos aquí o <span class="text-indigo-600 dark:text-indigo-400 font-medium">haz clic para buscar</span></p>
+          <p class="text-sm text-gray-500 dark:text-gray-500 mt-1">MP4, WebM, etc.</p>
+        </div>
+      </div>
+      
+      <div class="mb-8">
+        <div class="relative">
+          <input type="text" id="external-video-url" class="w-full pl-3 pr-24 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600" placeholder="Pega un enlace de YouTube o Vimeo">
+          <button onclick="addExternalVideo()" class="absolute right-1 top-1 bg-indigo-500 hover:bg-indigo-600 text-white rounded px-3 py-1 text-sm">Añadir</button>
+        </div>
+      </div>
+      
+      <div class="swiper video-swiper">
+        <div class="swiper-wrapper">
+          <!-- Los vídeos se añadirán aquí dinámicamente -->
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev text-indigo-600"></div>
+        <div class="swiper-button-next text-indigo-600"></div>
+      </div>
+    </section>
+    
+    <!-- Sección Prompts -->
+    <section id="prompts" class="pt-16" data-aos="fade-up" data-aos-delay="100">
+      <div class="flex justify-between items-center mb-8">
+        <h2 class="text-2xl font-bold section-title">💬 Prompts AI</h2>
+        <button onclick="showAddModal('prompts-items', 'Añadir prompt', 'Prompts', 'text')" class="btn btn-primary">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none">
+            <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Añadir
+        </button>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="prompts-items">
+        <!-- Ejemplo de prompt colapsable con etiquetas -->
+        <div class="card p-5 bg-white dark:bg-gray-800" data-category="Prompts" data-aos="fade-up">
+          <div class="flex flex-col">
+            <div class="flex justify-between items-start mb-3 cursor-pointer" onclick="togglePrompt(this.parentElement)">
+              <h3 class="font-semibold text-lg text-gray-900 dark:text-gray-100">Prompt para creatividad</h3>
+              <div class="flex items-center">
+                <button class="text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 mr-2" onclick="copyPrompt(this.parentElement.parentElement.nextElementSibling.textContent); event.stopPropagation();">
+                  <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none">
+                    <path d="M8 5H6C4.89543 5 4 5.89543 4 7V19C4 20.1046 4.89543 21 6 21H16C17.1046 21 18 20.1046 18 19V17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <rect x="8" y="3" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                  </svg>
+                </button>
+                <svg class="w-5 h-5 text-gray-400 prompt-toggle-icon" viewBox="0 0 24 24" fill="none">
+                  <path d="M19 9l-7 7-7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-2 mb-3">
+              <span class="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">Creatividad</span>
+              <span class="px-2 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300">Escritura</span>
+            </div>
+            <div class="prompt-content hidden">
+              <p class="text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-700 p-3 rounded mt-2">
+                Actúa como un experto en creatividad. Ayúdame a generar ideas innovadoras para un proyecto de diseño que combine elementos futuristas con estética minimalista.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="text-center py-6 text-sm text-gray-500 dark:text-gray-400">
@@ -1244,9 +1411,6 @@
         easing: 'ease-out',
         once: true
       });
-      
-      // Inicializar Calendario
-      initCalendar();
       
       // Inicializar Swiper
       initSwiper();
@@ -1330,31 +1494,10 @@
         });
       });
       
-      // Filtros de tareas
-      document.getElementById('filter-all-tasks').addEventListener('click', function() {
-        filterTasks('all');
-        setActiveTaskFilter(this);
-      });
-      
-      document.getElementById('filter-pending-tasks').addEventListener('click', function() {
-        filterTasks('pending');
-        setActiveTaskFilter(this);
-      });
-      
-      document.getElementById('filter-completed-tasks').addEventListener('click', function() {
-        filterTasks('completed');
-        setActiveTaskFilter(this);
-      });
-      
       // Eventos de formulario
       document.getElementById('add-form').addEventListener('submit', function(e) {
         e.preventDefault();
         addItemFromModal();
-      });
-      
-      document.getElementById('event-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        addCalendarEvent();
       });
       
       // Drag and drop para imágenes
@@ -1397,19 +1540,6 @@
       
       videoDropArea.addEventListener('drop', handleVideoDrop, false);
       
-      // Checkbox para tareas
-      document.querySelectorAll('.checkbox').forEach(checkbox => {
-        checkbox.addEventListener('change', function() {
-          const todoItem = this.closest('.todo-item');
-          if (this.checked) {
-            todoItem.classList.add('completed');
-          } else {
-            todoItem.classList.remove('completed');
-          }
-          saveTasks();
-        });
-      });
-      
       // Galería de imágenes (lightbox)
       document.querySelectorAll('.image-card img').forEach(img => {
         img.addEventListener('click', function() {
@@ -1437,153 +1567,63 @@
       document.querySelector(`[data-filter="${category}"]`).classList.add('active');
     }
     
-    // Filtrar tareas
-    function filterTasks(filter) {
-      const tasks = document.querySelectorAll('.todo-item');
-      tasks.forEach(task => {
-        const isCompleted = task.classList.contains('completed');
-        if (filter === 'all') {
-          task.style.display = 'flex';
-        } else if (filter === 'pending' && !isCompleted) {
-          task.style.display = 'flex';
-        } else if (filter === 'completed' && isCompleted) {
-          task.style.display = 'flex';
-        } else {
-          task.style.display = 'none';
-        }
-      });
-    }
-    
-    function setActiveTaskFilter(button) {
-      document.querySelectorAll('#tareas button').forEach(btn => {
-        btn.classList.remove('active');
-      });
-      button.classList.add('active');
-    }
-    
-    // Modal para añadir elementos
-    function showAddModal(containerId, title, category, type) {
-      const modal = document.getElementById('add-modal');
-      const modalTitle = document.getElementById('modal-title');
-      const modalCategory = document.getElementById('modal-category');
-      const modalContainer = document.getElementById('modal-container');
-      const modalType = document.getElementById('modal-type');
+    // Toggle para prompts
+    function togglePrompt(promptElement) {
+      const content = promptElement.querySelector('.prompt-content');
+      const icon = promptElement.querySelector('.prompt-toggle-icon');
       
-      modalTitle.textContent = title;
-      modalCategory.value = category;
-      modalContainer.value = containerId;
-      modalType.value = type;
+      content.classList.toggle('active');
+      content.classList.toggle('hidden');
+      icon.classList.toggle('active');
       
-      // Mostrar/ocultar campos según el tipo
-      document.getElementById('url-input-group').style.display = type === 'url' ? 'block' : 'none';
-      document.getElementById('text-input-group').style.display = type === 'text' ? 'block' : 'none';
-      document.getElementById('video-input-group').style.display = type === 'video' ? 'block' : 'none';
-      
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-    }
-    
-    function closeAddModal() {
-      const modal = document.getElementById('add-modal');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-      document.getElementById('add-form').reset();
-    }
-    
-    // Añadir elemento desde el modal
-    function addItemFromModal() {
-      const title = document.getElementById('item-title').value;
-      const url = document.getElementById('item-url').value;
-      const text = document.getElementById('item-text').value;
-      const videoUrl = document.getElementById('item-video-url').value;
-      const category = document.getElementById('modal-category').value;
-      const containerId = document.getElementById('modal-container').value;
-      const type = document.getElementById('modal-type').value;
-      
-      if (type === 'url' && title && url) {
-        addLink(containerId, title, url, category);
-      } else if (type === 'text' && title && text) {
-        addPrompt(containerId, title, text);
-      } else if (type === 'video' && title && videoUrl) {
-        addVideoFromUrl(title, videoUrl);
-      } else if (type === 'event') {
-        // Manejado por otra función
+      // Si está activo, mostrar contenido
+      if (content.classList.contains('active')) {
+        content.style.maxHeight = content.scrollHeight + 'px';
       } else {
-        showToast('Por favor completa todos los campos requeridos', 'error');
-        return;
+        content.style.maxHeight = '0px';
       }
-      
-      closeAddModal();
-      showToast('Elemento añadido correctamente', 'success');
     }
     
-    // Añadir enlace
-    function addLink(containerId, title, url, category) {
-      const container = document.getElementById(containerId);
-      const iconClass = getIconClassForCategory(category);
+    // Seleccionar icono en el modal
+    function selectIcon(button) {
+      // Quitar selección anterior
+      document.querySelectorAll('.icon-select').forEach(btn => {
+        btn.classList.remove('ring-2', 'ring-indigo-500');
+      });
       
-      const linkElement = document.createElement('a');
-      linkElement.href = url;
-      linkElement.target = '_blank';
-      linkElement.className = 'card p-5 bg-white dark:bg-gray-800 hover:shadow-xl transition-all flex items-center gap-4';
-      linkElement.setAttribute('data-category', category);
-      linkElement.setAttribute('data-aos', 'fade-up');
+      // Añadir selección al botón actual
+      button.classList.add('ring-2', 'ring-indigo-500');
       
-      linkElement.innerHTML = `
-        <div class="p-3 ${iconClass.bg} rounded-xl">
-          <svg class="w-6 h-6 ${iconClass.text}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="currentColor"/>
-            <path d="M13 7H11V13H17V11H13V7Z" fill="currentColor"/>
-          </svg>
-        </div>
-        <div>
-          <h3 class="font-semibold text-lg">${title}</h3>
-          <p class="text-sm text-gray-600 dark:text-gray-400">${new URL(url).hostname}</p>
-        </div>
-      `;
-      
-      container.appendChild(linkElement);
-      saveLinks(containerId, category);
+      // Guardar valor seleccionado
+      document.getElementById('selected-icon').value = button.dataset.icon;
     }
     
-    // Iconos para cada categoría
-    function getIconClassForCategory(category) {
-      const icons = {
-        'IA': { bg: 'bg-green-100 dark:bg-green-900/20', text: 'text-green-500' },
-        'UX': { bg: 'bg-indigo-100 dark:bg-indigo-900/20', text: 'text-indigo-500' },
-        'Figma': { bg: 'bg-purple-100 dark:bg-purple-900/20', text: 'text-purple-500' },
-        'Web': { bg: 'bg-blue-100 dark:bg-blue-900/20', text: 'text-blue-500' },
-        'Portfolio': { bg: 'bg-pink-100 dark:bg-pink-900/20', text: 'text-pink-500' },
-        'default': { bg: 'bg-gray-100 dark:bg-gray-900/20', text: 'text-gray-500' }
-      };
+    // Seleccionar color en el modal
+    function selectColor(button) {
+      // Quitar selección anterior
+      document.querySelectorAll('.color-select').forEach(btn => {
+        btn.classList.remove('ring-2');
+      });
       
-      return icons[category] || icons.default;
+      // Añadir selección al botón actual
+      button.classList.add('ring-2');
+      
+      // Guardar valor seleccionado
+      document.getElementById('selected-color').value = button.dataset.color;
     }
     
-    // Añadir prompt
-    function addPrompt(containerId, title, text) {
-      const container = document.getElementById(containerId);
+    // Seleccionar color de etiqueta
+    function selectTagColor(button, color) {
+      // Quitar selección anterior
+      document.querySelectorAll('.tag-select').forEach(btn => {
+        btn.classList.remove('ring-1', 'ring-gray-500');
+      });
       
-      const promptElement = document.createElement('div');
-      promptElement.className = 'card p-5 bg-white dark:bg-gray-800';
-      promptElement.setAttribute('data-category', 'Prompts');
-      promptElement.setAttribute('data-aos', 'fade-up');
+      // Añadir selección al botón actual
+      button.classList.add('ring-1', 'ring-gray-500');
       
-      promptElement.innerHTML = `
-        <div class="flex justify-between items-start mb-3">
-          <h3 class="font-semibold text-lg">${title}</h3>
-          <button class="text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400" onclick="copyPrompt(this.parentElement.nextElementSibling.textContent)">
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none">
-              <path d="M8 5H6C4.89543 5 4 5.89543 4 7V19C4 20.1046 4.89543 21 6 21H16C17.1046 21 18 20.1046 18 19V17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <rect x="8" y="3" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/>
-            </svg>
-          </button>
-        </div>
-        <p class="text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-700 p-3 rounded">${text}</p>
-      `;
-      
-      container.appendChild(promptElement);
-      savePrompts();
+      // Guardar valor seleccionado
+      document.getElementById('selected-tag-color').value = color;
     }
   </script>
   
@@ -1899,7 +1939,7 @@
             <video src="${src}" controls class="w-full h-full"></video>
           </div>
           <div class="p-3">
-            <h3 class="font-medium text-sm truncate">${title || 'Vídeo subido'}</h3>
+            <h3 class="font-medium text-sm truncate text-gray-900 dark:text-white">${title || 'Vídeo subido'}</h3>
           </div>
         </div>
       `;
@@ -1914,224 +1954,534 @@
     }
     
     function addExternalVideo() {
-      const url = document.getElementById('video-url').value;
-      if (!url) return;
+      const videoUrl = document.getElementById('external-video-url').value.trim();
       
-      let videoId, videoSrc;
-      
-      // Extraer ID de YouTube
-      if (url.includes('youtube.com') || url.includes('youtu.be')) {
-        if (url.includes('youtube.com/watch?v=')) {
-          videoId = url.split('v=')[1].split('&')[0];
-        } else if (url.includes('youtu.be/')) {
-          videoId = url.split('youtu.be/')[1].split('?')[0];
+      if (videoUrl) {
+        // Procesar URL de YouTube o Vimeo
+        let embedUrl = '';
+        let videoTitle = 'Vídeo externo';
+        
+        if (videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be')) {
+          // Extraer ID de YouTube
+          let videoId = '';
+          if (videoUrl.includes('youtube.com/watch?v=')) {
+            videoId = videoUrl.split('v=')[1].split('&')[0];
+          } else if (videoUrl.includes('youtu.be/')) {
+            videoId = videoUrl.split('youtu.be/')[1];
+          }
+          
+          if (videoId) {
+            embedUrl = `https://www.youtube.com/embed/${videoId}`;
+            videoTitle = 'Vídeo de YouTube';
+          }
+        } else if (videoUrl.includes('vimeo.com')) {
+          // Extraer ID de Vimeo
+          const vimeoId = videoUrl.split('vimeo.com/')[1];
+          if (vimeoId) {
+            embedUrl = `https://player.vimeo.com/video/${vimeoId}`;
+            videoTitle = 'Vídeo de Vimeo';
+          }
         }
         
-        if (videoId) {
-          videoSrc = `https://www.youtube.com/embed/${videoId}`;
-        }
-      }
-      // Extraer ID de Vimeo
-      else if (url.includes('vimeo.com')) {
-        videoId = url.split('vimeo.com/')[1].split('?')[0];
-        if (videoId) {
-          videoSrc = `https://player.vimeo.com/video/${videoId}`;
-        }
-      }
-      
-      if (videoSrc) {
-        const swiper = document.querySelector('.video-swiper .swiper-wrapper');
-        
-        const slide = document.createElement('div');
-        slide.className = 'swiper-slide';
-        slide.setAttribute('data-category', 'Video');
-        
-        slide.innerHTML = `
-          <div class="video-card rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800">
-            <div class="aspect-video">
-              <iframe class="w-full h-full" src="${videoSrc}" title="Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        if (embedUrl) {
+          const swiper = document.querySelector('.video-swiper .swiper-wrapper');
+          
+          const slide = document.createElement('div');
+          slide.className = 'swiper-slide';
+          slide.setAttribute('data-category', 'Video');
+          
+          slide.innerHTML = `
+            <div class="video-card rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800">
+              <div class="aspect-video">
+                <iframe src="${embedUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-full"></iframe>
+              </div>
+              <div class="p-3">
+                <h3 class="font-medium text-sm truncate text-gray-900 dark:text-white">${videoTitle}</h3>
+              </div>
             </div>
-            <div class="p-3">
-              <h3 class="font-medium text-sm truncate">${url}</h3>
-            </div>
-          </div>
-        `;
-        
-        swiper.appendChild(slide);
-        
-        // Reiniciar Swiper para que reconozca el nuevo slide
-        initSwiper();
-        
-        saveVideos();
-        document.getElementById('video-url').value = '';
-        showToast('Vídeo añadido correctamente', 'success');
-      } else {
-        showToast('URL de vídeo no válida. Por favor, usa un enlace de YouTube o Vimeo', 'error');
+          `;
+          
+          swiper.appendChild(slide);
+          
+          // Reiniciar Swiper para que reconozca el nuevo slide
+          initSwiper();
+          
+          document.getElementById('external-video-url').value = '';
+          saveVideos();
+          showToast('Vídeo externo añadido correctamente', 'success');
+        } else {
+          showToast('URL de vídeo no válida. Usa YouTube o Vimeo', 'error');
+        }
       }
     }
     
-    // Almacenamiento local
+    // Almacenamiento de datos
+    function saveLinks(containerId, category) {
+      const container = document.getElementById(containerId);
+      const links = [];
+      
+      container.querySelectorAll('a[data-category="' + category + '"]').forEach(link => {
+        links.push({
+          title: link.querySelector('h3').textContent,
+          url: link.href,
+          category: link.getAttribute('data-category'),
+          icon: link.querySelector('svg').outerHTML,
+          color: link.querySelector('div').className
+        });
+      });
+      
+      localStorage.setItem(containerId + '-' + category, JSON.stringify(links));
+    }
+    
+    function savePrompts() {
+      const promptsContainer = document.getElementById('prompts-items');
+      const prompts = [];
+      
+      promptsContainer.querySelectorAll('div[data-category="Prompts"]').forEach(promptEl => {
+        const title = promptEl.querySelector('h3').textContent;
+        const text = promptEl.querySelector('.prompt-content p').textContent;
+        const tagsElements = promptEl.querySelectorAll('.flex-wrap.gap-2.mb-3 span');
+        const tags = [];
+        
+        tagsElements.forEach(tag => {
+          tags.push({
+            text: tag.textContent,
+            class: tag.className
+          });
+        });
+        
+        prompts.push({
+          title,
+          text,
+          tags
+        });
+      });
+      
+      localStorage.setItem('prompts', JSON.stringify(prompts));
+    }
+    
+    function saveTasks() {
+      const tasksContainer = document.getElementById('tasks-container');
+      const tasks = [];
+      
+      tasksContainer.querySelectorAll('.todo-item').forEach(taskEl => {
+        tasks.push({
+          text: taskEl.querySelector('span').textContent,
+          completed: taskEl.classList.contains('completed')
+        });
+      });
+      
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+    
+    function saveImages() {
+      const galleryContainer = document.getElementById('gallery-container');
+      const images = [];
+      
+      galleryContainer.querySelectorAll('.image-card img').forEach(img => {
+        images.push({
+          src: img.src,
+          alt: img.alt
+        });
+      });
+      
+      localStorage.setItem('images', JSON.stringify(images));
+    }
+    
+    function saveVideos() {
+      const swiper = document.querySelector('.video-swiper .swiper-wrapper');
+      const videos = [];
+      
+      swiper.querySelectorAll('.swiper-slide').forEach(slide => {
+        const video = slide.querySelector('video');
+        const iframe = slide.querySelector('iframe');
+        
+        if (video) {
+          videos.push({
+            type: 'local',
+            src: video.src,
+            title: slide.querySelector('h3').textContent
+          });
+        } else if (iframe) {
+          videos.push({
+            type: 'embed',
+            src: iframe.src,
+            title: slide.querySelector('h3').textContent
+          });
+        }
+      });
+      
+      localStorage.setItem('videos', JSON.stringify(videos));
+    }
+    
+    function saveCalendarEvents() {
+      if (!calendar) return;
+      
+      const events = calendar.getEvents().map(event => ({
+        title: event.title,
+        start: event.startStr,
+        end: event.endStr,
+        backgroundColor: event.backgroundColor,
+        borderColor: event.borderColor,
+        description: event.extendedProps.description
+      }));
+      
+      localStorage.setItem('calendarEvents', JSON.stringify(events));
+    }
+    
+    // Cargar datos almacenados
     function loadStoredData() {
       loadLinks();
       loadPrompts();
       loadTasks();
       loadImages();
       loadVideos();
-    }
-    
-    function saveLinks(containerId, category) {
-      const container = document.getElementById(containerId);
-      const links = [];
-      
-      container.querySelectorAll('a').forEach(link => {
-        const title = link.querySelector('h3').textContent;
-        const url = link.href;
-        
-        links.push({ title, url });
-      });
-      
-      localStorage.setItem(`links_${category}`, JSON.stringify(links));
+      loadCalendarEvents();
     }
     
     function loadLinks() {
+      const containers = ['ia-items', 'uxui-items', 'figma-items', 'webs-items', 'portfolio-items'];
       const categories = ['IA', 'UX', 'Figma', 'Web', 'Portfolio'];
       
-      categories.forEach(category => {
-        const links = JSON.parse(localStorage.getItem(`links_${category}`)) || [];
-        const containerId = category === 'IA' ? 'ia-items' :
-                          category === 'UX' ? 'uxui-items' :
-                          category === 'Figma' ? 'figma-items' :
-                          category === 'Web' ? 'webs-items' :
-                          category === 'Portfolio' ? 'portfolio-items' : null;
+      containers.forEach((containerId, index) => {
+        const category = categories[index];
+        const storedLinks = localStorage.getItem(containerId + '-' + category);
         
-        if (containerId && links.length > 0) {
-          // Limpiar contenedor para evitar duplicados
-          // document.getElementById(containerId).innerHTML = '';
-          
-          // links.forEach(link => {
-          //   addLink(containerId, link.title, link.url, category);
-          // });
+        if (storedLinks) {
+          const links = JSON.parse(storedLinks);
+          links.forEach(link => {
+            const container = document.getElementById(containerId);
+            
+            const linkElement = document.createElement('a');
+            linkElement.href = link.url;
+            linkElement.target = '_blank';
+            linkElement.className = 'card p-5 bg-white dark:bg-gray-800 hover:shadow-xl transition-all flex items-center gap-4';
+            linkElement.setAttribute('data-category', link.category);
+            linkElement.setAttribute('data-aos', 'fade-up');
+            
+            // Si tenemos el ícono guardado, usarlo, sino generar uno
+            if (link.icon) {
+              linkElement.innerHTML = `
+                <div class="${link.color || 'p-3 bg-blue-100 dark:bg-blue-900/20 rounded-xl'}">
+                  ${link.icon}
+                </div>
+                <div>
+                  <h3 class="font-semibold text-lg text-gray-900 dark:text-white">${link.title}</h3>
+                  <p class="text-sm text-gray-600 dark:text-gray-400">${new URL(link.url).hostname}</p>
+                </div>
+              `;
+            } else {
+              const iconClass = getColorClass('blue');
+              
+              linkElement.innerHTML = `
+                <div class="p-3 ${iconClass.bg} rounded-xl">
+                  ${getIconByName('code')}
+                </div>
+                <div>
+                  <h3 class="font-semibold text-lg text-gray-900 dark:text-white">${link.title}</h3>
+                  <p class="text-sm text-gray-600 dark:text-gray-400">${new URL(link.url).hostname}</p>
+                </div>
+              `;
+            }
+            
+            container.appendChild(linkElement);
+          });
         }
       });
     }
     
-    function savePrompts() {
-      const container = document.getElementById('prompts-items');
-      const prompts = [];
-      
-      container.querySelectorAll('.card').forEach(card => {
-        const title = card.querySelector('h3').textContent;
-        const text = card.querySelector('p').textContent;
-        
-        prompts.push({ title, text });
-      });
-      
-      localStorage.setItem('prompts', JSON.stringify(prompts));
-    }
-    
     function loadPrompts() {
-      const prompts = JSON.parse(localStorage.getItem('prompts')) || [];
+      const storedPrompts = localStorage.getItem('prompts');
       
-      if (prompts.length > 0) {
-        // Limpiar contenedor para evitar duplicados
-        // document.getElementById('prompts-items').innerHTML = '';
+      if (storedPrompts) {
+        const prompts = JSON.parse(storedPrompts);
+        const container = document.getElementById('prompts-items');
         
-        // prompts.forEach(prompt => {
-        //   addPrompt('prompts-items', prompt.title, prompt.text);
-        // });
-      }
-    }
-    
-    function saveTasks() {
-      const container = document.getElementById('tasks-container');
-      const tasks = [];
-      
-      container.querySelectorAll('.todo-item').forEach(item => {
-        const text = item.querySelector('span').textContent;
-        const completed = item.classList.contains('completed');
-        
-        tasks.push({ text, completed });
-      });
-      
-      localStorage.setItem('tasks', JSON.stringify(tasks));
-    }
-    
-    function loadTasks() {
-      const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-      
-      if (tasks.length > 0) {
-        // Evitamos limpiar para mantener las tareas de ejemplo
-        // document.getElementById('tasks-container').innerHTML = '';
-        
-        // tasks.forEach(task => {
-        //   const taskElement = document.createElement('div');
-        //   taskElement.className = `todo-item ${task.completed ? 'completed' : ''}`;
-        //   taskElement.innerHTML = `
-        //     <input type="checkbox" class="checkbox" ${task.completed ? 'checked' : ''}>
-        //     <span class="flex-1">${task.text}</span>
-        //     <button class="text-red-500 p-1" onclick="deleteTask(this.parentElement)">
-        //       <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none">
-        //         <path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        //       </svg>
-        //     </button>
-        //   `;
+        prompts.forEach(prompt => {
+          const promptElement = document.createElement('div');
+          promptElement.className = 'card p-5 bg-white dark:bg-gray-800';
+          promptElement.setAttribute('data-category', 'Prompts');
+          promptElement.setAttribute('data-aos', 'fade-up');
           
-        //   document.getElementById('tasks-container').appendChild(taskElement);
+          // Crear elementos de etiquetas
+          let tagsHTML = '';
+          if (prompt.tags && prompt.tags.length > 0) {
+            prompt.tags.forEach(tag => {
+              if (tag) {
+                tagsHTML += `<span class="${tag.class || 'px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300'}">${tag.text}</span>`;
+              }
+            });
+          }
           
-        //   // Añadir evento de checkbox
-        //   taskElement.querySelector('.checkbox').addEventListener('change', function() {
-        //     if (this.checked) {
-        //       taskElement.classList.add('completed');
-        //     } else {
-        //       taskElement.classList.remove('completed');
-        //     }
-        //     saveTasks();
-        //   });
-        // });
+          promptElement.innerHTML = `
+            <div class="flex flex-col">
+              <div class="flex justify-between items-start mb-3 cursor-pointer" onclick="togglePrompt(this.parentElement)">
+                <h3 class="font-semibold text-lg text-gray-900 dark:text-white">${prompt.title}</h3>
+                <div class="flex items-center">
+                  <button class="text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 mr-2" onclick="copyPrompt(this.parentElement.parentElement.nextElementSibling.nextElementSibling.textContent); event.stopPropagation();">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none">
+                      <path d="M8 5H6C4.89543 5 4 5.89543 4 7V19C4 20.1046 4.89543 21 6 21H16C17.1046 21 18 20.1046 18 19V17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <rect x="8" y="3" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                    </svg>
+                  </button>
+                  <svg class="w-5 h-5 text-gray-400 prompt-toggle-icon" viewBox="0 0 24 24" fill="none">
+                    <path d="M19 9l-7 7-7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="flex flex-wrap gap-2 mb-3">
+                ${tagsHTML}
+              </div>
+              <div class="prompt-content hidden">
+                <p class="text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-700 p-3 rounded mt-2">
+                  ${prompt.text}
+                </p>
+              </div>
+            </div>
+          `;
+          
+          container.appendChild(promptElement);
+        });
       }
-    }
-    
-    function saveCalendarEvents() {
-      const events = calendar.getEvents().map(event => ({
-        title: event.title,
-        start: event.startStr,
-        end: event.endStr,
-        color: event.backgroundColor,
-        description: event.extendedProps.description || ''
-      }));
-      
-      localStorage.setItem('calendarEvents', JSON.stringify(events));
-    }
-    
-    function loadCalendarEvents() {
-      const events = JSON.parse(localStorage.getItem('calendarEvents')) || [];
-      
-      events.forEach(event => {
-        calendar.addEvent(event);
-      });
-    }
-    
-    function saveImages() {
-      // Esta función es más complicada porque las imágenes son datos más grandes
-      // Para una implementación completa, necesitaríamos usar indexedDB en lugar de localStorage
-      // Por ahora, solo guardaremos la cantidad de imágenes
-      const count = document.querySelectorAll('.image-card').length;
-      localStorage.setItem('imageCount', count);
     }
     
     function loadImages() {
-      // Solo para referencia, no implementaremos la carga real de imágenes
-    }
-    
-    function saveVideos() {
-      // Similar a imágenes, solo guardaremos la cantidad
-      const count = document.querySelectorAll('.video-swiper .swiper-slide').length;
-      localStorage.setItem('videoCount', count);
+      const storedImages = localStorage.getItem('images');
+      
+      if (storedImages) {
+        const images = JSON.parse(storedImages);
+        images.forEach(image => {
+          addImageToGallery(image.src, image.alt);
+        });
+      }
     }
     
     function loadVideos() {
-      // Solo para referencia, no implementaremos la carga real de videos
+      const storedVideos = localStorage.getItem('videos');
+      
+      if (storedVideos) {
+        const videos = JSON.parse(storedVideos);
+        const swiper = document.querySelector('.video-swiper .swiper-wrapper');
+        
+        videos.forEach(video => {
+          if (video.type === 'local') {
+            addVideoToGallery(video.src, video.title);
+          } else if (video.type === 'embed') {
+            const slide = document.createElement('div');
+            slide.className = 'swiper-slide';
+            slide.setAttribute('data-category', 'Video');
+            
+            slide.innerHTML = `
+              <div class="video-card rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800">
+                <div class="aspect-video">
+                  <iframe src="${video.src}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-full"></iframe>
+                </div>
+                <div class="p-3">
+                  <h3 class="font-medium text-sm truncate text-gray-900 dark:text-white">${video.title}</h3>
+                </div>
+              </div>
+            `;
+            
+            swiper.appendChild(slide);
+          }
+        });
+        
+        // Reiniciar Swiper para que reconozca los nuevos slides
+        initSwiper();
+      }
+    }
+    
+    function loadCalendarEvents() {
+      if (!calendar) return;
+      
+      const storedEvents = localStorage.getItem('calendarEvents');
+      
+      if (storedEvents) {
+        const events = JSON.parse(storedEvents);
+        events.forEach(event => {
+          calendar.addEvent(event);
+        });
+      }
     }
   </script>
+  
+  <!-- Modales -->
+  <!-- Modal para añadir elementos -->
+  <div id="add-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-gray-800 rounded-lg max-w-md w-full p-6">
+      <div class="flex justify-between items-center mb-4">
+        <h3 id="modal-title" class="text-xl font-semibold">Añadir elemento</h3>
+        <button onclick="closeAddModal()" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      
+      <form id="add-form" class="space-y-4">
+        <input type="hidden" id="modal-category" value="">
+        <input type="hidden" id="modal-container" value="">
+        <input type="hidden" id="modal-type" value="">
+        
+        <div class="space-y-2">
+          <label for="item-title" class="block text-sm font-medium">Título</label>
+          <input type="text" id="item-title" class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600" placeholder="Título del elemento">
+        </div>
+        
+        <div id="url-input-group" class="space-y-2">
+          <label for="item-url" class="block text-sm font-medium">URL</label>
+          <input type="url" id="item-url" class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600" placeholder="https://...">
+        </div>
+        
+        <div id="text-input-group" class="space-y-2 hidden">
+          <label for="item-text" class="block text-sm font-medium">Texto</label>
+          <textarea id="item-text" class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600" rows="4" placeholder="Escribe aquí..."></textarea>
+        </div>
+        
+        <div id="video-input-group" class="space-y-2 hidden">
+          <label for="item-video-url" class="block text-sm font-medium">URL del vídeo</label>
+          <input type="url" id="item-video-url" class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600" placeholder="YouTube o Vimeo URL">
+        </div>
+        
+        <div id="icon-input-group" class="space-y-2">
+          <label class="block text-sm font-medium">Ícono</label>
+          <div class="grid grid-cols-4 gap-2">
+            <button type="button" class="p-2 border rounded hover:bg-gray-100 dark:hover:bg-gray-700 icon-select" data-icon="code" onclick="selectIcon(this)">
+              <svg class="w-6 h-6 mx-auto" viewBox="0 0 24 24" fill="none">
+                <path d="M9 9L4 12L9 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M15 9L20 12L15 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 18L10 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <button type="button" class="p-2 border rounded hover:bg-gray-100 dark:hover:bg-gray-700 icon-select" data-icon="puzzle" onclick="selectIcon(this)">
+              <svg class="w-6 h-6 mx-auto" viewBox="0 0 24 24" fill="none">
+                <path d="M4 14.2632C4 12.8626 4 12.1623 4.25866 11.6139C4.48431 11.1352 4.84355 10.754 5.29323 10.5156C5.81368 10.24 6.47663 10.24 7.80253 10.24H9.5C10.3284 10.24 11 9.56843 11 8.74C11 7.91157 10.3284 7.24 9.5 7.24H7.80253C6.47663 7.24 5.81368 7.24 5.29323 6.96434C4.84355 6.72599 4.48431 6.34477 4.25866 5.86602C4 5.31767 4 4.61737 4 3.21675V3C4 2.44772 4.44772 2 5 2H19C19.5523 2 20 2.44772 20 3V5.67124M4 18V21C4 21.5523 4.44772 22 5 22H7.75C8.99264 22 9.61396 22 10.1179 21.7551C10.5626 21.5385 10.9354 21.1827 11.1654 20.7516C11.4211 20.2709 11.4211 19.6335 11.4211 18.3587V16.5C11.4211 15.6716 12.0927 15 12.9211 15C13.7495 15 14.4211 15.6716 14.4211 16.5V18.3587C14.4211 19.6335 14.4211 20.2709 14.6767 20.7516C14.9067 21.1827 15.2795 21.5385 15.7242 21.7551C16.2282 22 16.8495 22 18.0921 22H19C19.5523 22 20 21.5523 20 21V9M20 9H17C16.0572 9 15.5858 9 15.2929 8.70711C15 8.41421 15 7.94281 15 7V5C15 4.05719 15 3.58579 15.2929 3.29289C15.5858 3 16.0572 3 17 3H20V9Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <button type="button" class="p-2 border rounded hover:bg-gray-100 dark:hover:bg-gray-700 icon-select" data-icon="brush" onclick="selectIcon(this)">
+              <svg class="w-6 h-6 mx-auto" viewBox="0 0 24 24" fill="none">
+                <path d="M20 7L15 2L4 13L3 16L3.5 16.5L4 19L6 20.5L9 21L12 20L21 11L19 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M15 6L17.5 8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <button type="button" class="p-2 border rounded hover:bg-gray-100 dark:hover:bg-gray-700 icon-select" data-icon="heart" onclick="selectIcon(this)">
+              <svg class="w-6 h-6 mx-auto" viewBox="0 0 24 24" fill="none">
+                <path d="M12 20L4.3314 12.0474C3.47892 11.1633 3 9.96429 3 8.71405C3 6.11055 5.03517 4 7.54569 4C8.75128 4 9.90749 4.49666 10.76 5.38071L12 6.66667L13.24 5.38071C14.0925 4.49666 15.2487 4 16.4543 4C18.9648 4 21 6.11055 21 8.71405C21 9.96429 20.5211 11.1633 19.6686 12.0474L12 20Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+          <input type="hidden" id="selected-icon" value="code">
+        </div>
+        
+        <div id="color-input-group" class="space-y-2">
+          <label class="block text-sm font-medium">Color de fondo</label>
+          <div class="grid grid-cols-6 gap-2">
+            <button type="button" class="w-8 h-8 rounded-full bg-blue-100 hover:ring-2 ring-blue-400 color-select" data-color="blue" onclick="selectColor(this)"></button>
+            <button type="button" class="w-8 h-8 rounded-full bg-green-100 hover:ring-2 ring-green-400 color-select" data-color="green" onclick="selectColor(this)"></button>
+            <button type="button" class="w-8 h-8 rounded-full bg-purple-100 hover:ring-2 ring-purple-400 color-select" data-color="purple" onclick="selectColor(this)"></button>
+            <button type="button" class="w-8 h-8 rounded-full bg-red-100 hover:ring-2 ring-red-400 color-select" data-color="red" onclick="selectColor(this)"></button>
+            <button type="button" class="w-8 h-8 rounded-full bg-yellow-100 hover:ring-2 ring-yellow-400 color-select" data-color="yellow" onclick="selectColor(this)"></button>
+            <button type="button" class="w-8 h-8 rounded-full bg-indigo-100 hover:ring-2 ring-indigo-400 color-select" data-color="indigo" onclick="selectColor(this)"></button>
+          </div>
+          <input type="hidden" id="selected-color" value="blue">
+        </div>
+        
+        <div id="tags-input-group" class="space-y-2 hidden">
+          <label for="item-tags" class="block text-sm font-medium">Etiquetas (separadas por comas)</label>
+          <input type="text" id="item-tags" class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600" placeholder="IA, diseño, programación...">
+          
+          <div class="flex flex-wrap gap-2 mt-2">
+            <button type="button" class="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300 tag-select" data-color="blue" onclick="selectTagColor(this, 'blue')">Azul</button>
+            <button type="button" class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300 tag-select" data-color="green" onclick="selectTagColor(this, 'green')">Verde</button>
+            <button type="button" class="px-2 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300 tag-select" data-color="purple" onclick="selectTagColor(this, 'purple')">Morado</button>
+            <button type="button" class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300 tag-select" data-color="red" onclick="selectTagColor(this, 'red')">Rojo</button>
+            <button type="button" class="px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300 tag-select" data-color="yellow" onclick="selectTagColor(this, 'yellow')">Amarillo</button>
+          </div>
+          <input type="hidden" id="selected-tag-color" value="blue">
+        </div>
+        
+        <div class="flex justify-end pt-2">
+          <button type="button" onclick="closeAddModal()" class="px-4 py-2 border rounded-md mr-2 hover:bg-gray-100 dark:hover:bg-gray-700">Cancelar</button>
+          <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">Añadir</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <!-- Modal para eventos del calendario -->
+  <div id="event-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-gray-800 rounded-lg max-w-md w-full p-6">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-xl font-semibold">Añadir evento</h3>
+        <button onclick="closeEventModal()" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      
+      <form id="event-form" class="space-y-4">
+        <div class="space-y-2">
+          <label for="event-title" class="block text-sm font-medium">Título del evento</label>
+          <input type="text" id="event-title" class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600" placeholder="Título" required>
+        </div>
+        
+        <div class="space-y-2">
+          <label for="event-start" class="block text-sm font-medium">Fecha inicio</label>
+          <input type="datetime-local" id="event-start" class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600" required>
+        </div>
+        
+        <div class="space-y-2">
+          <label for="event-end" class="block text-sm font-medium">Fecha fin</label>
+          <input type="datetime-local" id="event-end" class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600" required>
+        </div>
+        
+        <div class="space-y-2">
+          <label for="event-color" class="block text-sm font-medium">Color</label>
+          <select id="event-color" class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600">
+            <option value="#6366f1">Indigo</option>
+            <option value="#ec4899">Rosa</option>
+            <option value="#8b5cf6">Violeta</option>
+            <option value="#10b981">Verde</option>
+            <option value="#f59e0b">Ámbar</option>
+            <option value="#ef4444">Rojo</option>
+          </select>
+        </div>
+        
+        <div class="space-y-2">
+          <label for="event-desc" class="block text-sm font-medium">Descripción</label>
+          <textarea id="event-desc" class="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600" rows="3" placeholder="Descripción opcional"></textarea>
+        </div>
+        
+        <div class="flex justify-end pt-2">
+          <button type="button" onclick="closeEventModal()" class="px-4 py-2 border rounded-md mr-2 hover:bg-gray-100 dark:hover:bg-gray-700">Cancelar</button>
+          <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <!-- Lightbox para imágenes -->
+  <div id="image-lightbox" class="hidden fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4">
+    <button id="close-lightbox" onclick="closeLightbox()" class="absolute top-4 right-4 text-white p-2 hover:text-gray-300">
+      <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+    
+    <button id="prev-image" class="absolute left-4 text-white p-2 hover:text-gray-300">
+      <svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+      </svg>
+    </button>
+    
+    <img id="lightbox-image" class="max-h-[90vh] max-w-[90vw] object-contain" src="" alt="Imagen ampliada">
+    
+    <button id="next-image" class="absolute right-4 text-white p-2 hover:text-gray-300">
+      <svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+      </svg>
+    </button>
+  </div>
 </body>
 </html>
