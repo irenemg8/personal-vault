@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vault Personal – Irene MG</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-white shadow sticky top-0 z-10">
+    <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-xl font-bold">📁 Mi Vault Personal</h1>
+      <nav class="space-x-4 text-sm">
+        <a href="#prompts" class="hover:text-indigo-600">Prompts</a>
+        <a href="#enlaces" class="hover:text-indigo-600">Enlaces</a>
+        <a href="#imagenes" class="hover:text-indigo-600">Imágenes</a>
+        <a href="#videos" class="hover:text-indigo-600">Videos</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-4 py-10">
+    <section class="text-center mb-12">
+      <h2 class="text-3xl font-bold mb-2">Bienvenida a tu espacio personal</h2>
+      <p class="text-gray-600">Un lugar donde guardas lo que te inspira, lo que usas y lo que crearás.</p>
+    </section>
+
+    <section id="prompts" class="mb-12">
+      <h3 class="text-xl font-semibold mb-4">💡 Prompts</h3>
+      <ul class="space-y-2">
+        <li class="bg-white p-4 rounded shadow-sm">"Dame 5 ideas de diseño para portfolios en 3D con interacción"</li>
+        <li class="bg-white p-4 rounded shadow-sm">"Explícame Tailwind como si tuviera 5 años"</li>
+      </ul>
+    </section>
+
+    <section id="enlaces" class="mb-12">
+      <h3 class="text-xl font-semibold mb-4">🔗 Enlaces</h3>
+      <ul class="list-disc list-inside text-indigo-700">
+        <li><a href="https://ui.shadcn.dev/" target="_blank">Componentes UI – shadcn</a></li>
+        <li><a href="https://www.framer.com/motion/" target="_blank">Animaciones en Framer Motion</a></li>
+      </ul>
+    </section>
+
+    <section id="imagenes" class="mb-12">
+      <h3 class="text-xl font-semibold mb-4">🖼️ Imágenes</h3>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <img src="https://via.placeholder.com/300x200" alt="Ejemplo" class="rounded shadow">
+        <img src="https://via.placeholder.com/300x200" alt="Ejemplo" class="rounded shadow">
+      </div>
+    </section>
+
+    <section id="videos" class="mb-12">
+      <h3 class="text-xl font-semibold mb-4">🎥 Videos</h3>
+      <div class="space-y-4">
+        <iframe class="w-full aspect-video rounded shadow" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Video ejemplo" allowfullscreen></iframe>
+      </div>
+    </section>
+  </main>
+
+  <footer class="text-center py-6 text-sm text-gray-500">
+    Hecho por Irene MG · Diseño UX/UI con ❤️ · Abril 2025
+  </footer>
+</body>
+</html>
