@@ -26,6 +26,17 @@
       document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
       document.querySelector(`[data-filter="${category}"]`).classList.add('active');
     }
+
+    function addItem(sectionId, placeholder, category) {
+      const value = prompt(placeholder);
+      if (value) {
+        const item = document.createElement('div');
+        item.className = "bg-white dark:bg-gray-800 p-4 rounded shadow mb-2";
+        item.setAttribute('data-category', category);
+        item.innerText = value;
+        document.getElementById(sectionId).appendChild(item);
+      }
+    }
   </script>
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
@@ -33,58 +44,88 @@
     <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
       <h1 class="text-xl font-bold">📁 Mi Vault Personal</h1>
       <nav class="space-x-4 text-sm">
-        <a href="#vault" class="hover:text-indigo-600 dark:hover:text-indigo-400">Contenido</a>
-        <a href="#imagenes" class="hover:text-indigo-600 dark:hover:text-indigo-400">Imágenes</a>
-        <a href="#videos" class="hover:text-indigo-600 dark:hover:text-indigo-400">Videos</a>
+        <a href="#ia" class="hover:text-indigo-600 dark:hover:text-indigo-400">IA</a>
+        <a href="#uxui" class="hover:text-indigo-600 dark:hover:text-indigo-400">UX/UI</a>
+        <a href="#figma" class="hover:text-indigo-600 dark:hover:text-indigo-400">Figma</a>
+        <a href="#webs" class="hover:text-indigo-600 dark:hover:text-indigo-400">Webs</a>
+        <a href="#prompts" class="hover:text-indigo-600 dark:hover:text-indigo-400">Prompts</a>
       </nav>
     </div>
   </header>
 
-  <main class="max-w-5xl mx-auto px-4 py-10">
-    <section class="text-center mb-12">
-      <h2 class="text-3xl font-bold mb-2">Bienvenida a tu espacio personal</h2>
-      <p class="text-gray-600 dark:text-gray-300">Filtra y accede a tus recursos favoritos de IA, UX/UI, diseño, prompts y herramientas.</p>
-    </section>
-
-    <section id="vault" class="mb-12">
-      <h3 class="text-xl font-semibold mb-6 text-center">🎯 Filtrar por categoría</h3>
-      <div class="flex flex-wrap gap-2 justify-center mb-6">
-        <button class="filter-btn border px-4 py-2 rounded" data-filter="all" onclick="filterCategory('all')">Todos</button>
-        <button class="filter-btn border px-4 py-2 rounded" data-filter="IA" onclick="filterCategory('IA')">IA</button>
-        <button class="filter-btn border px-4 py-2 rounded" data-filter="UX" onclick="filterCategory('UX')">UX/UI</button>
-        <button class="filter-btn border px-4 py-2 rounded" data-filter="Figma" onclick="filterCategory('Figma')">Figma</button>
-        <button class="filter-btn border px-4 py-2 rounded" data-filter="Web" onclick="filterCategory('Web')">Webs útiles</button>
+  <main class="max-w-5xl mx-auto px-4 py-10 space-y-12">
+    <section id="ia">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-2xl font-bold">🤖 Inteligencia Artificial</h2>
+        <button onclick="addItem('ia-items', 'Añadir herramienta IA', 'IA')" class="text-sm px-3 py-1 bg-indigo-600 text-white rounded">+ Añadir</button>
       </div>
-
-      <div class="space-y-3">
-        <div class="bg-white dark:bg-gray-800 p-4 rounded shadow" data-category="IA">🔮 ChatGPT</div>
-        <div class="bg-white dark:bg-gray-800 p-4 rounded shadow" data-category="IA">💬 Gemini</div>
-        <div class="bg-white dark:bg-gray-800 p-4 rounded shadow" data-category="IA">🎨 Ideogram</div>
-        <div class="bg-white dark:bg-gray-800 p-4 rounded shadow" data-category="IA">🧠 Claude</div>
-        <div class="bg-white dark:bg-gray-800 p-4 rounded shadow" data-category="IA">📚 Scispace</div>
-        <div class="bg-white dark:bg-gray-800 p-4 rounded shadow" data-category="Web UX">🌐 Godly Website</div>
-        <div class="bg-white dark:bg-gray-800 p-4 rounded shadow" data-category="UX Figma">🛠️ Ditto (Plugin Figma)</div>
-        <div class="bg-white dark:bg-gray-800 p-4 rounded shadow" data-category="Figma">✍️ Frontitude</div>
-        <div class="bg-white dark:bg-gray-800 p-4 rounded shadow" data-category="Web">🔗 curated.design</div>
-        <div class="bg-white dark:bg-gray-800 p-4 rounded shadow" data-category="IA">📄 PromptBase</div>
-        <div class="bg-white dark:bg-gray-800 p-4 rounded shadow" data-category="Figma UX">📝 Grammarly</div>
-        <div class="bg-white dark:bg-gray-800 p-4 rounded shadow" data-category="UX Web">🎨 Component Gallery</div>
-        <div class="bg-white dark:bg-gray-800 p-4 rounded shadow" data-category="Web">📌 Awwwards</div>
+      <div id="ia-items" class="space-y-2">
+        <a href="#" class="block p-4 rounded shadow bg-white dark:bg-gray-800" data-category="IA">ChatGPT</a>
+        <a href="#" class="block p-4 rounded shadow bg-white dark:bg-gray-800" data-category="IA">Gemini</a>
+        <a href="#" class="block p-4 rounded shadow bg-white dark:bg-gray-800" data-category="IA">Ideogram</a>
+        <a href="#" class="block p-4 rounded shadow bg-white dark:bg-gray-800" data-category="IA">Claude</a>
+        <a href="#" class="block p-4 rounded shadow bg-white dark:bg-gray-800" data-category="IA">NotebookLM</a>
+        <a href="#" class="block p-4 rounded shadow bg-white dark:bg-gray-800" data-category="IA">Napkin</a>
+        <a href="#" class="block p-4 rounded shadow bg-white dark:bg-gray-800" data-category="IA">Grammarly</a>
+        <a href="#" class="block p-4 rounded shadow bg-white dark:bg-gray-800" data-category="IA">Scispace</a>
+        <a href="#" class="block p-4 rounded shadow bg-white dark:bg-gray-800" data-category="IA">Zotero</a>
+        <a href="#" class="block p-4 rounded shadow bg-white dark:bg-gray-800" data-category="IA">Perplexity</a>
+        <a href="#" class="block p-4 rounded shadow bg-white dark:bg-gray-800" data-category="IA">Elicit</a>
+        <a href="#" class="block p-4 rounded shadow bg-white dark:bg-gray-800" data-category="IA">ResearchRabbit</a>
+        <a href="#" class="block p-4 rounded shadow bg-white dark:bg-gray-800" data-category="IA">Consensus</a>
+        <a href="#" class="block p-4 rounded shadow bg-white dark:bg-gray-800" data-category="IA">DeepSeek</a>
+        <a href="#" class="block p-4 rounded shadow bg-white dark:bg-gray-800" data-category="IA">Lovable.dev</a>
       </div>
     </section>
 
-    <section id="imagenes" class="mb-12">
-      <h3 class="text-xl font-semibold mb-4">🖼️ Imágenes</h3>
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-        <img src="https://via.placeholder.com/300x200" alt="Ejemplo" class="rounded shadow">
-        <img src="https://via.placeholder.com/300x200" alt="Ejemplo" class="rounded shadow">
+    <section id="uxui">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-2xl font-bold">🎨 UX/UI</h2>
+        <button onclick="addItem('uxui-items', 'Añadir recurso UX/UI', 'UX')" class="text-sm px-3 py-1 bg-indigo-600 text-white rounded">+ Añadir</button>
+      </div>
+      <div id="uxui-items" class="space-y-2">
+        <a href="https://mobbin.com" target="_blank" class="block p-4 rounded shadow bg-white dark:bg-gray-800" data-category="UX">Mobbin</a>
+        <a href="https://www.awwwards.com" target="_blank" class="block p-4 rounded shadow bg-white dark:bg-gray-800" data-category="UX">Awwwards</a>
+        <a href="https://webinteractions.gallery" target="_blank" class="block p-4 rounded shadow bg-white dark:bg-gray-800" data-category="UX">Web Interactions</a>
       </div>
     </section>
 
-    <section id="videos" class="mb-12">
-      <h3 class="text-xl font-semibold mb-4">🎥 Videos</h3>
-      <div class="space-y-4">
-        <iframe class="w-full aspect-video rounded shadow" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Video ejemplo" allowfullscreen></iframe>
+    <section id="figma">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-2xl font-bold">🛠️ Plugins y Recursos Figma</h2>
+        <button onclick="addItem('figma-items', 'Añadir plugin Figma', 'Figma')" class="text-sm px-3 py-1 bg-indigo-600 text-white rounded">+ Añadir</button>
+      </div>
+      <div id="figma-items" class="space-y-2">
+        <a href="https://layers.to" class="block p-4 rounded shadow bg-white dark:bg-gray-800">Layers.to</a>
+        <a href="https://www.grammarly.com" class="block p-4 rounded shadow bg-white dark:bg-gray-800">Grammarly</a>
+        <a href="https://www.frontitude.com" class="block p-4 rounded shadow bg-white dark:bg-gray-800">Frontitude</a>
+        <a href="https://ghostuxwriter.com" class="block p-4 rounded shadow bg-white dark:bg-gray-800">Ghost UX Writer</a>
+        <a href="https://www.parrot.ai" class="block p-4 rounded shadow bg-white dark:bg-gray-800">Parrot</a>
+      </div>
+    </section>
+
+    <section id="webs">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-2xl font-bold">🔗 Webs útiles</h2>
+        <button onclick="addItem('webs-items', 'Añadir enlace web', 'Web')" class="text-sm px-3 py-1 bg-indigo-600 text-white rounded">+ Añadir</button>
+      </div>
+      <div id="webs-items" class="space-y-2">
+        <a href="https://curated.design" target="_blank" class="block p-4 rounded shadow bg-white dark:bg-gray-800">Curated Design</a>
+        <a href="https://godly.website" target="_blank" class="block p-4 rounded shadow bg-white dark:bg-gray-800">Godly Website</a>
+        <a href="https://footer.design" target="_blank" class="block p-4 rounded shadow bg-white dark:bg-gray-800">Footer Design</a>
+        <a href="https://teardowns.ai" target="_blank" class="block p-4 rounded shadow bg-white dark:bg-gray-800">Teardowns AI</a>
+        <a href="https://component.gallery" target="_blank" class="block p-4 rounded shadow bg-white dark:bg-gray-800">Component Gallery</a>
+      </div>
+    </section>
+
+    <section id="prompts">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-2xl font-bold">💬 Prompts útiles</h2>
+        <button onclick="addItem('prompts-items', 'Añadir nuevo prompt', 'Prompts')" class="text-sm px-3 py-1 bg-indigo-600 text-white rounded">+ Añadir</button>
+      </div>
+      <div id="prompts-items" class="space-y-2">
+        <div class="p-4 rounded shadow bg-white dark:bg-gray-800">"Explícame Tailwind como si tuviera 5 años"</div>
+        <div class="p-4 rounded shadow bg-white dark:bg-gray-800">"Dame 5 ideas de diseño para portfolios en 3D con interacción"</div>
       </div>
     </section>
   </main>
