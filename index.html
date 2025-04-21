@@ -476,7 +476,7 @@
         <a href="#uxui" class="nav-link font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">UX/UI</a>
         <a href="#figma" class="nav-link font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Figma</a>
         <a href="#webs" class="nav-link font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Webs</a>
-        <a href="#portfolio" class="nav-link font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Portfolio</a>
+        <a href="#portfolio" class="nav-link font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Portfolios</a>
         <a href="#imagenes" class="nav-link font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Imágenes</a>
         <a href="#videos" class="nav-link font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Vídeos</a>
         <a href="#prompts" class="nav-link font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Prompts</a>
@@ -505,7 +505,7 @@
         <a href="#uxui" class="font-medium hover:text-indigo-600 dark:hover:text-indigo-400">UX/UI</a>
         <a href="#figma" class="font-medium hover:text-indigo-600 dark:hover:text-indigo-400">Figma</a>
         <a href="#webs" class="font-medium hover:text-indigo-600 dark:hover:text-indigo-400">Webs</a>
-        <a href="#portfolio" class="font-medium hover:text-indigo-600 dark:hover:text-indigo-400">Portfolio</a>
+        <a href="#portfolio" class="font-medium hover:text-indigo-600 dark:hover:text-indigo-400">Portfolios</a>
         <a href="#imagenes" class="font-medium hover:text-indigo-600 dark:hover:text-indigo-400">Imágenes</a>
         <a href="#videos" class="font-medium hover:text-indigo-600 dark:hover:text-indigo-400">Vídeos</a>
         <a href="#prompts" class="font-medium hover:text-indigo-600 dark:hover:text-indigo-400">Prompts</a>
@@ -1223,7 +1223,7 @@
     <!-- Sección Portfolio -->
     <section id="portfolio" class="pt-16" data-aos="fade-up">
       <div class="flex justify-between items-center mb-8">
-        <h2 class="text-2xl font-bold section-title">📁 Portfolio</h2>
+        <h2 class="text-2xl font-bold section-title">📁 Portfolios</h2>
       </div>
       
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="portfolio-items">
@@ -1781,21 +1781,50 @@
           continue;
         }
         
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          addImageToGallery(e.target.result, file.name);
-        };
-        reader.readAsDataURL(file);
+        // Usamos el fetch para subir el archivo al servidor
+        const formData = new FormData();
+        formData.append('image', file);
+        
+        fetch('/upload-image', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            addImageToGallery('/src/img/' + data.filename, file.name);
+          } else {
+            // Fallback: si hay error en el servidor, cargamos la imagen como base64
+            const reader = new FileReader();
+            reader.onload = function(e) {
+              addImageToGallery(e.target.result, file.name, true);
+            };
+            reader.readAsDataURL(file);
+          }
+        })
+        .catch(error => {
+          console.error('Error al subir imagen:', error);
+          // Fallback: cargamos la imagen como base64
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            addImageToGallery(e.target.result, file.name, true);
+          };
+          reader.readAsDataURL(file);
+        });
       }
     }
     
-    function addImageToGallery(src, title) {
+    function addImageToGallery(src, title, isBase64 = false) {
       const galleryContainer = document.getElementById('gallery-container');
       
       const imgCard = document.createElement('div');
       imgCard.className = 'image-card aspect-square rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 flex items-center justify-center';
       imgCard.setAttribute('data-category', 'Imagen');
       imgCard.setAttribute('data-aos', 'fade-up');
+      
+      if (isBase64) {
+        imgCard.setAttribute('data-is-base64', 'true');
+      }
       
       const img = document.createElement('img');
       img.src = src;
@@ -1864,17 +1893,43 @@
           continue;
         }
         
-        const url = URL.createObjectURL(file);
-        addVideoToGallery(url, file.name);
+        // Usamos el fetch para subir el archivo al servidor
+        const formData = new FormData();
+        formData.append('video', file);
+        
+        fetch('/upload-video', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            addVideoToGallery('/src/video/' + data.filename, file.name);
+          } else {
+            // Fallback: si hay error en el servidor, usamos URL.createObjectURL
+            const url = URL.createObjectURL(file);
+            addVideoToGallery(url, file.name, true);
+          }
+        })
+        .catch(error => {
+          console.error('Error al subir video:', error);
+          // Fallback: usamos URL.createObjectURL
+          const url = URL.createObjectURL(file);
+          addVideoToGallery(url, file.name, true);
+        });
       }
     }
     
-    function addVideoToGallery(src, title) {
+    function addVideoToGallery(src, title, isObjectURL = false) {
       const swiper = document.querySelector('.video-swiper .swiper-wrapper');
       
       const slide = document.createElement('div');
       slide.className = 'swiper-slide';
       slide.setAttribute('data-category', 'Video');
+      
+      if (isObjectURL) {
+        slide.setAttribute('data-is-object-url', 'true');
+      }
       
       slide.innerHTML = `
         <div class="video-card rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800">
@@ -2022,9 +2077,12 @@
       const images = [];
       
       galleryContainer.querySelectorAll('.image-card img').forEach(img => {
+        const isBase64 = img.closest('.image-card').getAttribute('data-is-base64') === 'true';
+        
         images.push({
           src: img.src,
-          alt: img.alt
+          alt: img.alt,
+          isBase64: isBase64
         });
       });
       
@@ -2038,12 +2096,14 @@
       swiper.querySelectorAll('.swiper-slide').forEach(slide => {
         const video = slide.querySelector('video');
         const iframe = slide.querySelector('iframe');
+        const isObjectURL = slide.getAttribute('data-is-object-url') === 'true';
         
         if (video) {
           videos.push({
             type: 'local',
             src: video.src,
-            title: slide.querySelector('h3').textContent
+            title: slide.querySelector('h3').textContent,
+            isObjectURL: isObjectURL
           });
         } else if (iframe) {
           videos.push({
@@ -2189,26 +2249,49 @@
     }
     
     function loadImages() {
+      // Primero cargar desde localStorage
       const storedImages = localStorage.getItem('images');
       
       if (storedImages) {
         const images = JSON.parse(storedImages);
         images.forEach(image => {
-          addImageToGallery(image.src, image.alt);
+          if (!image.src.startsWith('/src/img/')) {
+            addImageToGallery(image.src, image.alt, image.isBase64);
+          }
         });
       }
+      
+      // Luego cargar las imágenes de la carpeta src/img
+      fetch('/list-images')
+        .then(response => response.json())
+        .then(data => {
+          if (data.success && data.images) {
+            data.images.forEach(image => {
+              // Evitar duplicados verificando si ya existe
+              const exists = Array.from(document.querySelectorAll('.image-card img')).some(img => 
+                img.src.includes(image.filename)
+              );
+              
+              if (!exists) {
+                addImageToGallery('/src/img/' + image.filename, image.filename);
+              }
+            });
+          }
+        })
+        .catch(error => {
+          console.error('Error al cargar imágenes del servidor:', error);
+        });
     }
     
     function loadVideos() {
+      // Primero cargar desde localStorage
       const storedVideos = localStorage.getItem('videos');
       
       if (storedVideos) {
         const videos = JSON.parse(storedVideos);
-        const swiper = document.querySelector('.video-swiper .swiper-wrapper');
-        
         videos.forEach(video => {
-          if (video.type === 'local') {
-            addVideoToGallery(video.src, video.title);
+          if (video.type === 'local' && !video.src.startsWith('/src/video/')) {
+            addVideoToGallery(video.src, video.title, video.isObjectURL);
           } else if (video.type === 'embed') {
             const slide = document.createElement('div');
             slide.className = 'swiper-slide';
@@ -2225,13 +2308,34 @@
               </div>
             `;
             
-            swiper.appendChild(slide);
+            document.querySelector('.video-swiper .swiper-wrapper').appendChild(slide);
           }
         });
-        
-        // Reiniciar Swiper para que reconozca los nuevos slides
-        initSwiper();
       }
+      
+      // Luego cargar los videos de la carpeta src/video
+      fetch('/list-videos')
+        .then(response => response.json())
+        .then(data => {
+          if (data.success && data.videos) {
+            data.videos.forEach(video => {
+              // Evitar duplicados verificando si ya existe
+              const exists = Array.from(document.querySelectorAll('.video-card video')).some(v => 
+                v.src.includes(video.filename)
+              );
+              
+              if (!exists) {
+                addVideoToGallery('/src/video/' + video.filename, video.filename);
+              }
+            });
+          }
+          
+          // Reiniciar Swiper para que reconozca los nuevos slides
+          initSwiper();
+        })
+        .catch(error => {
+          console.error('Error al cargar videos del servidor:', error);
+        });
     }
     
     function loadCalendarEvents() {
