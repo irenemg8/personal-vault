@@ -142,25 +142,6 @@ https://danielschifano.notion.site/Complete-Web-Mobile-Designer-Resources-2024-c
 
 
 
-https://www.figma.com/community/plugin/838413521721548186/unused-components
-https://www.figma.com/community/plugin/767721682134156281
-https://www.figma.com/community/plugin/801195587640428208/design-lint
-https://www.figma.com/community/plugin/733025261168520714/figmotion
-https://www.figma.com/community/plugin/734590934750866002/chart
-https://www.figma.com/community/plugin/748533339900865323/contrast
-https://www.figma.com/community/plugin/735098390272716381/iconify
-https://www.figma.com/community/plugin/740272380439725040/material-design-icons
-https://www.figma.com/community/plugin/744047966581015514
-https://www.figma.com/community/plugin/852192486284901337/streamline-icons-illustrations-and-emoji-a-ui-ux-icon-library-with-svg-and-png
-https://www.figma.com/community/plugin/739503328703046360/humaaans-for-figma
-https://www.figma.com/community/plugin/781441863578182316/illustrations
-https://www.figma.com/community/plugin/838959511417581040
-https://www.figma.com/community/plugin/775712743044356003/duotones
-https://www.figma.com/community/plugin/738775292786594626/design-inspo
-https://www.figma.com/community/plugin/738454987945972471
-https://www.figma.com/community/plugin/768550475442788437/color-search
-https://www.figma.com/community/plugin/809860933081065308
-https://www.figma.com/community/plugin/731841207668879837/image-palette
 https://www.figma.com/community/plugin/733902567457592893
 https://www.figma.com/community/plugin/818613147082270958
 https://www.figma.com/community/plugin/742764242781786818/wireframe
